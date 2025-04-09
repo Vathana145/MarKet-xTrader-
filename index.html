@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <title>Market x Trader</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="rum.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Khmer OS Battambang', sans-serif;
+    }
+
+    .background {
+      position: relative;
+      background-image: url('6379114.jpg'); /* Background image */
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* black semi-transparent */
+      backdrop-filter: blur(5px); /* ✅ blur effect here */
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      max-width: 280px;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 20px 0;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+     .button {
+      font-family: 'Khmer OS Battambang', sans-serif;
+      padding: 14px 32px;
+      background-color: orange;
+      color: rgb(255, 255, 255);
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      background-color: rgb(0, 255, 55);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background">
+    <div class="overlay"></div>
+
+    <div class="content">
+      <img src="Artboard 1.png" alt="Logo" class="logo">
+      <div class="title">សូមស្វាគមន៍មកកាន់គេហទំព័រយើងខ្ញុំ</div>
+      <button id="btn1" class="button" onclick="goToPage()">ចុចទីនេះដើម្បីចូលទិញ</button>
+    </div>
+  </div>
+
+</body>
+</html>

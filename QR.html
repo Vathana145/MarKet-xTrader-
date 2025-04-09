@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <title>បង់ប្រាក់ជាមួយ KHQR</title>
+  <style>
+    body {
+      font-family: 'Koulen', 'Hanuman', sans-serif;
+      background-color: #fff;
+      text-align: center;
+      padding-top: 5px;
+    }
+    h1 {
+      font-family: Khmer OS Muol Light;
+      color: #ffffff;
+    }
+
+    .qr-container {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .qr-image {
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .btn-show-qr {
+      background-color: #FFC107;
+      color: red;
+      font-size: 24px;
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px black;
+      transition: all 0.3s ease;
+    }
+
+    .btn-show-qr:hover {
+      background-color: #ffb300;
+      transform: scale(1.05);
+    }
+
+    .reload-btn, .reload-btn1 {
+      position: absolute;
+      bottom: 30px;
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      animation: fadeIn 1s ease-in;
+      color: white;
+    }
+
+    .reload-btn {
+      right: 10px;
+      background-color: #008cff;
+    }
+
+    .reload-btn:hover {
+      background-color: #1976D2;
+    }
+
+    .reload-btn1 {
+      left: 30px;
+      background-color: #ff0008;
+    }
+
+    .reload-btn1:hover {
+      background-color: #1976D2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.95); }
+    }
+
+    .fade-out {
+      animation: fadeOut 1s ease forwards;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 999; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%;
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.5); 
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .modal-content p {
+      font-size: 20px;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    .modal-content button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .btn-confirm {
+      background-color: green;
+      color: white;
+    }
+
+    .btn-cancel {
+      background-color: red;
+      color: white;
+    }
+    .modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+
+  border: 5px solid transparent;
+  background-clip: padding-box;
+}
+
+.modal-content::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  border-radius: 25px;
+  background: linear-gradient(45deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet,
+    red);
+  background-size: 400% 400%;
+  animation: borderRGB 8s linear infinite;
+}
+@keyframes borderRGB {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('6379114.jpg'); /* Make sure the image path is correct */
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+    z-index: -1;
+  }
+  </style>
+</head>
+<body>
+    <div class="background"></div>
+  <h1>សូមបង់ប្រាក់តាមរយៈ KHQR ខាងក្រោមនេះ</h1>
+
+  <button class="btn-show-qr" onclick="showQR()">ចុចទីនេះសម្រាប់បង្ហាញ QR ដើម្បីបង់ប្រាក់</button>
+  <div class="countdown" id="countdown" style="display:none; font-size: 20px; color: rgb(255, 0, 0); margin-top: 10px;">
+    QR នឹងបិទក្នុងពេល <span id="time">10</span> វិនាទី
+  </div>
+  <button class="reload-btn" onclick="reloadHomePage()">🔄 ត្រឡប់ទៅទំព័រដើម</button>
+  <button class="reload-btn1" onclick="reloadPrePage()">◀️ ត្រឡប់ថយក្រោម</button>
+
+  <div class="qr-container" id="qrContainer">
+    <img src="IMG_1460.PNG" alt="KHQR Code" class="qr-image">
+  </div>
+
+
+  <!-- MODAL POP-UP -->
+  <div id="paymentModal" class="modal">
+    <div class="modal-content">
+      <p>តើអ្នកបានបង់ប្រាក់រួចហើយឬនៅ?</p>
+      <button class="btn-confirm" onclick="confirmPayment()">✅ បង់រួចរាល់</button>
+      <button class="btn-cancel" onclick="notYetPaid()">❌ មិនទាន់បង់</button>
+    </div>
+  </div>
+
+  <script>
+    function showQR() {
+      const qr = document.getElementById("qrContainer");
+      const countdown = document.getElementById("countdown");
+      const timeSpan = document.getElementById("time");
+
+      qr.style.display = "block";
+      countdown.style.display = "block";
+
+      let timeLeft = 59;
+      timeSpan.textContent = timeLeft;
+
+      const timer = setInterval(() => {
+        timeLeft--;
+        timeSpan.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          qr.classList.add("fade-out");
+          countdown.classList.add("fade-out");
+
+          setTimeout(() => {
+            qr.style.display = "none";
+            countdown.style.display = "none";
+            qr.classList.remove("fade-out");
+            countdown.classList.remove("fade-out");
+
+            // បង្ហាញ Modal
+            document.getElementById("paymentModal").style.display = "block";
+          }, 1000);
+        }
+      }, 1000);
+    }
+
+    function reloadHomePage() {
+      window.location.href = "index.html";
+    }
+
+    function reloadPrePage() {
+      window.location.href = "index2.html";
+    }
+
+    function confirmPayment() {
+      alert("សូមអរគុណដែលបានបង់ប្រាក់!");
+      window.location.href = "thank.html";
+    }
+
+    function notYetPaid() {
+      alert("សូមបង់ប្រាក់ជាមុនសិន។");
+      document.getElementById("paymentModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
